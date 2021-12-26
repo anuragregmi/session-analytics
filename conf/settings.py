@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-
     'session',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +54,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ['debug_toolbar', ]
+    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware", ]
+    INTERNAL_IPS = ["127.0.0.1", ]
 
 ROOT_URLCONF = 'conf.urls'
 
