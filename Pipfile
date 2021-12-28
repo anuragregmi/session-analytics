@@ -9,6 +9,8 @@ python-dotenv = "*"
 psycopg2-binary = "*"
 django-debug-toolbar = "*"
 pandas = "*"
+django-q = "*"
+redis = "*"
 
 [dev-packages]
 ipdb = "*"
