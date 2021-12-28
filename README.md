@@ -34,3 +34,11 @@ There are two parts of this app:
  ## Basic Flow of Analytics
  
  ![Basic Flow](session_analytic.drawio.png)
+ 
+ ### Looking for some code
+ **Checkout following files**
+ - [Report Generation](https://github.com/anuragregmi/session-analytics/blob/main/analytics/utils.py)
+ - [Views](https://github.com/anuragregmi/session-analytics/blob/main/analytics/api/v1/views.py)
+ - [CRUD](https://github.com/anuragregmi/session-analytics/blob/main/session/api/v1/views.py)
+ - [Test of Report Generation](https://github.com/anuragregmi/session-analytics/blob/main/analytics/tests.py)
+ - [Example API Test](https://github.com/anuragregmi/session-analytics/blob/main/analytics/api/v1/tests.py)
