@@ -9,7 +9,7 @@ class Session(models.Model):
     )
     device_id = models.UUIDField()
     session_name = models.CharField(max_length=255)
-    recorded_on = models.DateTimeField(auto_now_add=True)
+    recorded_on = models.DateTimeField(db_index=True)
     duration_in_seconds = models.FloatField()
     is_active = models.BooleanField()
 

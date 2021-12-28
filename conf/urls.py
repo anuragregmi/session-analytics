@@ -20,7 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/v1/session/', include('session.api.v1.urls'))
+    path('api/v1/session/', include('session.api.v1.urls')),
+    path('api/v1/analytics/', include('analytics.api.v1.urls')),
+
 ]
 
 if settings.DEBUG:

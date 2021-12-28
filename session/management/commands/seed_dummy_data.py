@@ -10,33 +10,39 @@ from session.models import Session
 
 
 class Command(BaseCommand):
-    help = "Seed database with dummy session data"
+    help = "Seed database with dummy session data for testing"
 
     def handle(self, *args, **kwargs):
+
         devices_count = 500
-        chunk_size = 1000
-        count = 1000000
+        chunk_size = 10000
+        count = 1000
+
+        delete_qs = Session.objects.all()
+        delete_qs._raw_delete(delete_qs.db)
 
         device_ids = [uuid.uuid4() for i in range(devices_count)]
 
-        for counter in range(count):
-            instances = [
-                Session(
-                    device_id=random.choice(device_ids),
-                    session_name=f"Session {i}",
-                    recorded_on=(
-                        timezone.now() - timezone.timedelta(
-                            minutes=random.randrange(500, 5256000)
-                        )
-                    ),
-                    duration_in_seconds=random.randrange(5, 25000),
-                    is_active=random.choice([True, False])
-                )
-                for i in range(chunk_size)
-            ]
+        try:
 
-            with transaction.atomic:
-                Session.objects.bulk_create(instances)
-                update_session_count()
+            for counter in range(count):
+                instances = [
+                    Session(
+                        device_id=random.choice(device_ids),
+                        session_name=f"Session {i}",
+                        recorded_on=(
+                            timezone.now() - timezone.timedelta(
+                                minutes=random.randrange(500, 5256000)
+                            )
+                        ),
+                        duration_in_seconds=random.randrange(5, 1000),
+                        is_active=random.choice([True, False])
+                    )
+                    for i in range(chunk_size)
+                ]
 
-            print(f"Created {counter*chunk_size}/{chunk_size*count}", end="\r")
+                Session.objects.bulk_create(instances, batch_size=chunk_size)
+                print(
+                    f"Created {(counter+1)*chunk_size}/{chunk_size*count}", end="\r")
+        finally:
+            update_session_count()
