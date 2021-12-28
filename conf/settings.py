@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import sys
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -169,3 +170,6 @@ CACHES = {
         'LOCATION': 'redis://127.0.0.1:6379',
     }
 }
+
+if 'test' in sys.argv:
+    CACHES['default']['KEY_PREFIX'] = 'test_'
